@@ -9,6 +9,97 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Homework 3
+\begin{center}
+Homework 3
+\end{center}
 
+Question 1 \
+
+a.
+
+```{r, indent="    ", message=FALSE}
+library("tidyverse")
+
+df <- expand.grid("x" = 1:10, "y" = 1:10) 
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  theme_minimal()
+```
+
+b. 
+
+```{r, indent="    ", message=FALSE}
+ggplot(df, aes(x, y)) +
+  geom_point() +
+  theme_minimal() +
+  coord_equal()
+```
+
+c.
+
+```{r, indent="    ", message=FALSE}
+set.seed(1)
+fuzz <- rnorm(nrow(df))
+ggplot(df, aes(x, y, fill = fuzz)) +
+  theme_minimal() +
+  geom_tile()
+```
+
+d.
+```{r, indent="    ", message=FALSE}
+set.seed(1)
+fuzz <- rnorm(nrow(df))
+ggplot(df, aes(x, y, fill = fuzz)) +
+  theme_minimal() +
+  geom_tile() +
+  theme(legend.position="none") +
+  coord_equal()
+```
+
+e. 
+```{r, indent="    ", message=FALSE}
+set.seed(1)
+fuzz <- rnorm(nrow(df))
+ggplot(df, aes(x, y, fill = fuzz)) +
+  theme_bw() +
+  geom_tile() +
+  coord_equal() +
+  theme(legend.position="none") +
+  scale_fill_distiller(palette = "Greys")
+```
+
+f.
+```{r, indent="    ", message=FALSE}
+set.seed(1)
+fuzz <- rnorm(nrow(df))
+ggplot(df, aes(x, y, fill = fuzz)) +
+  geom_tile() +
+  coord_equal() +
+  scale_fill_distiller(palette = "Greys") +
+  ylab(NULL) +
+  xlab(NULL) +
+  theme_void() +
+  theme(legend.position="none")
+```
+
+g.
+```{r, indent="    ", message=FALSE}
+x <- seq(0, 1, 1e-4)
+fx <- sin(2*pi*x)
+sine <- data.frame("x" = x, "y" = fx)
+ggplot(sine, aes(x, fx)) +
+  theme_minimal() +
+  geom_line()
+```
+
+h.
+```{r, indent="    ", message=FALSE}
+x <- seq(0, 1, 1e-4)
+fx <- sin(2*pi*x) # wrong geom!!!
+sine <- data.frame("x" = x, "y" = fx)
+ggplot(sine, aes(x, fx)) +
+  theme_minimal() +
+  geom_line(color = "gray50", size = 5) +
+  geom_line(color = "green")
+```
 
