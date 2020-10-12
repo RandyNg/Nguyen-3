@@ -1,23 +1,23 @@
 ---
-title: "Nguyen-3"
-author: "Randy Nguyen"
-date: "10/12/2020"
 output: pdf_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, fig.height = 3)
 ```
+
+John Hendley & Randy Nguyen \
+
+STA 6375 
 
 \begin{center}
 Homework 3
 \end{center}
 
-Question 1 \
+## Question 1
 
 a.
-
-```{r, indent="    ", message=FALSE}
+```{r, indent="    ", message = FALSE}
 library("tidyverse")
 
 df <- expand.grid("x" = 1:10, "y" = 1:10) 
@@ -26,50 +26,48 @@ ggplot(df, aes(x, y)) +
   theme_minimal()
 ```
 
-b. 
-
-```{r, indent="    ", message=FALSE}
+b.
+```{r, indent="    ", message = FALSE}
 ggplot(df, aes(x, y)) +
   geom_point() +
   theme_minimal() +
   coord_equal()
 ```
-
+  
 c.
-
-```{r, indent="    ", message=FALSE}
+```{r, indent="    ", message = FALSE}
 set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
   theme_minimal() +
   geom_tile()
 ```
-
+  
 d.
-```{r, indent="    ", message=FALSE}
+```{r, indent="    ", message = FALSE}
 set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
   theme_minimal() +
   geom_tile() +
-  theme(legend.position="none") +
+  theme(legend.position = "none") +
   coord_equal()
 ```
-
-e. 
-```{r, indent="    ", message=FALSE}
+  
+e.
+```{r, indent="    ", message = FALSE}
 set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
   theme_bw() +
   geom_tile() +
   coord_equal() +
-  theme(legend.position="none") +
+  theme(legend.position = "none") +
   scale_fill_distiller(palette = "Greys")
 ```
-
+  
 f.
-```{r, indent="    ", message=FALSE}
+```{r, indent="    ", message = FALSE}
 set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
@@ -79,11 +77,11 @@ ggplot(df, aes(x, y, fill = fuzz)) +
   ylab(NULL) +
   xlab(NULL) +
   theme_void() +
-  theme(legend.position="none")
+  theme(legend.position = "none")
 ```
-
+  
 g.
-```{r, indent="    ", message=FALSE}
+```{r, indent="    ", message = FALSE}
 x <- seq(0, 1, 1e-4)
 fx <- sin(2*pi*x)
 sine <- data.frame("x" = x, "y" = fx)
@@ -91,15 +89,39 @@ ggplot(sine, aes(x, fx)) +
   theme_minimal() +
   geom_line()
 ```
-
+  
 h.
-```{r, indent="    ", message=FALSE}
+```{r, indent="    ", message = FALSE}
 x <- seq(0, 1, 1e-4)
-fx <- sin(2*pi*x) # wrong geom!!!
+fx <- sin(2*pi*x)
 sine <- data.frame("x" = x, "y" = fx)
 ggplot(sine, aes(x, fx)) +
   theme_minimal() +
-  geom_line(color = "gray50", size = 5) +
+  geom_ribbon(aes(ymin = fx - 0.24, ymax = fx + 0.24), fill = "grey70") +
   geom_line(color = "green")
 ```
 
+i.
+
+
+j.
+
+
+## Question 2
+
+a. 
+
+
+b.
+
+
+c.
+
+
+d.
+
+
+e.
+
+
+f.
