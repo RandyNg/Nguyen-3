@@ -120,6 +120,11 @@ j.
 ```{r, indent = "    ", message = FALSE}
 set.seed(1)
 df <- data.frame(x = rnorm(1e3, mean = 3, sd = 2))
+ggplot(df, aes(x)) +
+  geom_density() +
+  stat_function(fun = dnorm, args = list(mean = 3, sd = 2), color = "red") +
+  geom_vline(xintercept = 8, color = "red", linetype = "twodash", size = 1) +
+  theme_minimal()
 ```
 
 ## Question 2
