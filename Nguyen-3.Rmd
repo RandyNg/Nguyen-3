@@ -197,7 +197,7 @@ s$u %*% D %*% t(V)
 
 
 d.
-```{r just testing the example given}
+```{r just testing the example given, indent = "    "}
 (A <- matrix(1:4, nrow = 2)) # A is invertible
 
 (elu <- Matrix::expand(Matrix::lu(A)))
@@ -207,6 +207,22 @@ with(elu, P %*% L %*% U)
 
 
 e.
+```{r Cholesky decomposition, indent = "    "}
+A <- matrix(c(
+  4, 2, 1,
+  2, 4, 2,
+  1, 2, 4),
+  nrow = 3, byrow = TRUE)
+# A is a square 3x3 matrix
+# A is a symmetric matrix positive definite matrix since
+# the entries are positive and a_{ij} = a_{ji} for all i and j
 
+(U <- chol(A))
+
+crossprod(U)
+```
 
 f.
+```{r QR decomposition, indent = "    "}
+
+```
