@@ -103,11 +103,14 @@ ggplot(sine, aes(x, fx)) +
 
 i.
 ```{r, indent = "    ", message = FALSE, fig.width = 3}
-x1 <- c(-1, -0.8, -0.3, 0.3, 0.8, 1)
-decagon_top <- sqrt(1 - (x1)^2)
-x2 <- c(1, 0.8, 0.3, -0.3, -0.8, -1)
-decagon_bot <- -1*sqrt(1 - (x2)^2)
-decagon <- data.frame(x = c(x1, x2), y = c(decagon_bot, decagon_top))
+x <- 
+y <- c()
+for (i in 0:10) {
+  x <- c(x, cos(i*pi/5))
+  y <- c(y, sin(i*pi/5))
+}
+
+decagon <- data.frame(x, y)
 ggplot(decagon, aes(x, y)) +
   geom_point() +
   geom_path() +
@@ -136,16 +139,11 @@ A <- matrix(c(
   -7, 9, 1,
   -2, 3, 4),
   nrow = 3, byrow = TRUE)
-I <- matrix(c(
-  1, 0, 0,
-  0, 1, 0,
-  0, 0, 1),
-  nrow = 3, byrow = TRUE)
 
 r <- eigen(A)
-V <- r$vector
-lam <- r$values
-Lambda <- lam*I
+(V <- r$vector)
+(lam <- r$values)
+Lambda <- diag(lam, nrow = 3, ncol = 3)
 
 V %*% Lambda %*% solve(V)
 ```
@@ -158,16 +156,11 @@ A <- matrix(c(
   2, 7, 0,
   -6, 0, 2),
   nrow = 3, byrow = TRUE)
-I <- matrix(c(
-  1, 0, 0,
-  0, 1, 0,
-  0, 0, 1),
-  nrow = 3, byrow = TRUE)
 
 r <- eigen(A)
 V <- r$vector
 lam <- r$values
-Lambda <- lam*I
+Lambda <- diag(lam, nrow = 3, ncol = 3)
 
 # V is orthogonal
 zapsmall(crossprod(V))
@@ -185,22 +178,32 @@ A <- matrix(c(
   4, 8, 12),
   nrow = 4, byrow = TRUE)
 
-s <- svd(A)
-U <- s$u
-D <- diag(s$d)
-V <- s$v
+s <- svd(A, nu = 4)
 
-U
+s$u
 
-zapsmall(D)
+# s$u is orthogonal
+zapsmall(s$u %*% t(s$u))
 
-V
+s$v
 
-U %*% D %*% t(V)
+# s$v is orthogonal
+zapsmall(s$v %*% t(s$v))
+
+(zapsmall(D <- diag(s$d, nrow = dim(s$u)[1], ncol = dim(s$v)[2])))
+
+s$u %*% D %*% t(V)
 ```
 
 
 d.
+```{r just testing the example given}
+(A <- matrix(1:4, nrow = 2)) # A is invertible
+
+(elu <- Matrix::expand(Matrix::lu(A)))
+
+with(elu, P %*% L %*% U)
+```
 
 
 e.
