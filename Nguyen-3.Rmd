@@ -169,14 +169,35 @@ V <- r$vector
 lam <- r$values
 Lambda <- lam*I
 
+# V is orthogonal
 zapsmall(crossprod(V))
 
 zapsmall(V %*% Lambda %*% t(V))
-
 ```
 
 
 c.
+```{r singular value decompostion (svd), indent = "    "}
+A <- matrix(c(
+  1, 5, 6,
+  2, 6, 8,
+  3, 7, 10,
+  4, 8, 12),
+  nrow = 4, byrow = TRUE)
+
+s <- svd(A)
+U <- s$u
+D <- diag(s$d)
+V <- s$v
+
+U
+
+zapsmall(D)
+
+V
+
+U %*% D %*% t(V)
+```
 
 
 d.
