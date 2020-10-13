@@ -152,6 +152,28 @@ V %*% Lambda %*% solve(V)
 
 
 b.
+```{r spectral decomposition of real symmetric matrices, indent = "    "}
+A <- matrix(c(
+  10, 2, -6,
+  2, 7, 0,
+  -6, 0, 2),
+  nrow = 3, byrow = TRUE)
+I <- matrix(c(
+  1, 0, 0,
+  0, 1, 0,
+  0, 0, 1),
+  nrow = 3, byrow = TRUE)
+
+r <- eigen(A)
+V <- r$vector
+lam <- r$values
+Lambda <- lam*I
+
+zapsmall(V %*% t(V))
+
+zapsmall(V %*% Lambda %*% t(V))
+
+```
 
 
 c.
