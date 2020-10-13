@@ -169,7 +169,7 @@ V <- r$vector
 lam <- r$values
 Lambda <- lam*I
 
-zapsmall(V %*% t(V))
+zapsmall(crossprod(V))
 
 zapsmall(V %*% Lambda %*% t(V))
 
