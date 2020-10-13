@@ -2,8 +2,8 @@
 output: pdf_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.height = 3)
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.height = 3, fig.align='center')
 ```
 
 John Hendley & Randy Nguyen \
@@ -17,7 +17,7 @@ Homework 3
 ## Question 1
 
 a.
-```{r, indent="    ", message = FALSE}
+```{r, indent = "    ", message = FALSE}
 library("tidyverse")
 
 df <- expand.grid("x" = 1:10, "y" = 1:10) 
@@ -27,7 +27,7 @@ ggplot(df, aes(x, y)) +
 ```
 
 b.
-```{r, indent="    ", message = FALSE}
+```{r, indent = "    ", message = FALSE}
 ggplot(df, aes(x, y)) +
   geom_point() +
   theme_minimal() +
@@ -35,7 +35,7 @@ ggplot(df, aes(x, y)) +
 ```
   
 c.
-```{r, indent="    ", message = FALSE}
+```{r, indent = "    ", message = FALSE}
 set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
@@ -44,7 +44,7 @@ ggplot(df, aes(x, y, fill = fuzz)) +
 ```
   
 d.
-```{r, indent="    ", message = FALSE}
+```{r, indent = "    ", message = FALSE}
 set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
@@ -55,7 +55,7 @@ ggplot(df, aes(x, y, fill = fuzz)) +
 ```
   
 e.
-```{r, indent="    ", message = FALSE}
+```{r, indent = "    ", message = FALSE}
 set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
@@ -67,7 +67,7 @@ ggplot(df, aes(x, y, fill = fuzz)) +
 ```
   
 f.
-```{r, indent="    ", message = FALSE}
+```{r, indent = "    ", message = FALSE}
 set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
@@ -81,7 +81,7 @@ ggplot(df, aes(x, y, fill = fuzz)) +
 ```
   
 g.
-```{r, indent="    ", message = FALSE}
+```{r, indent = "    ", message = FALSE}
 x <- seq(0, 1, 1e-4)
 fx <- sin(2*pi*x)
 sine <- data.frame("x" = x, "y" = fx)
@@ -91,21 +91,36 @@ ggplot(sine, aes(x, fx)) +
 ```
   
 h.
-```{r, indent="    ", message = FALSE}
+```{r, indent = "    ", message = FALSE}
 x <- seq(0, 1, 1e-4)
 fx <- sin(2*pi*x)
 sine <- data.frame("x" = x, "y" = fx)
 ggplot(sine, aes(x, fx)) +
   theme_minimal() +
-  geom_ribbon(aes(ymin = fx - 0.24, ymax = fx + 0.24), fill = "grey70") +
+  geom_ribbon(aes(ymin = fx - 0.2125, ymax = fx + 0.2125), fill = "grey50", alpha = 0.7) +
   geom_line(color = "green")
 ```
 
 i.
+```{r, indent = "    ", message = FALSE, fig.width = 3}
+x1 <- c(-1, -0.8, -0.3, 0.3, 0.8, 1)
+decagon_top <- sqrt(1 - (x1)^2)
+x2 <- c(1, 0.8, 0.3, -0.3, -0.8, -1)
+decagon_bot <- -1*sqrt(1 - (x2)^2)
+decagon <- data.frame(x = c(x1, x2), y = c(decagon_bot, decagon_top))
+ggplot(decagon, aes(x, y)) +
+  geom_point() +
+  geom_path() +
+  theme_minimal()
+
+```
 
 
 j.
-
+```{r, indent = "    ", message = FALSE}
+set.seed(1)
+df <- data.frame(x = rnorm(1e3, mean = 3, sd = 2))
+```
 
 ## Question 2
 
