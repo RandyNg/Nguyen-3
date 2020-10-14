@@ -19,7 +19,7 @@ Homework 3
 a.
 ```{r, indent = "    ", message = FALSE}
 library("tidyverse")
-
+# Calling the data frame df
 df <- expand.grid("x" = 1:10, "y" = 1:10) 
 ggplot(df, aes(x, y)) +
   geom_point() +
@@ -40,7 +40,7 @@ set.seed(1)
 fuzz <- rnorm(nrow(df))
 ggplot(df, aes(x, y, fill = fuzz)) +
   theme_minimal() +
-  geom_tile()
+  geom_tile() # looks better than geom_bin2d
 ```
   
 d.
@@ -97,17 +97,20 @@ fx <- sin(2*pi*x)
 sine <- data.frame("x" = x, "y" = fx)
 ggplot(sine, aes(x, fx)) +
   theme_minimal() +
+  # Can't tell the exact width of the shaded grey region
   geom_ribbon(aes(ymin = fx - 0.2125, ymax = fx + 0.2125), fill = "grey50", alpha = 0.7) +
   geom_line(color = "green")
 ```
 
 i.
 ```{r, indent = "    ", message = FALSE, fig.width = 3}
-x <- 
+# Calculating the coordinates equally spaced
+x <- c()
 y <- c()
+
 for (i in 0:10) {
-  x <- c(x, cos(i*pi/5))
-  y <- c(y, sin(i*pi/5))
+  x <- c(x, cos(i * pi/5))
+  y <- c(y, sin(i * pi/5))
 }
 
 decagon <- data.frame(x, y)
@@ -141,10 +144,17 @@ A <- matrix(c(
   nrow = 3, byrow = TRUE)
 
 r <- eigen(A)
+
+# V
 (V <- r$vector)
+
+# Eigenvalues
 (lam <- r$values)
+
+# Diagonal matrix Lambda
 Lambda <- diag(lam, nrow = 3, ncol = 3)
 
+# Verification
 V %*% Lambda %*% solve(V)
 ```
 
@@ -158,13 +168,20 @@ A <- matrix(c(
   nrow = 3, byrow = TRUE)
 
 r <- eigen(A)
-V <- r$vector
-lam <- r$values
+
+# Eigenvectors
+(V <- r$vector)
+
+# Eigenvalues
+(lam <- r$values)
+
+# Diagonal matrix Lambda
 Lambda <- diag(lam, nrow = 3, ncol = 3)
 
 # V is orthogonal
 zapsmall(crossprod(V))
 
+# Verification
 zapsmall(V %*% Lambda %*% t(V))
 ```
 
@@ -180,19 +197,23 @@ A <- matrix(c(
 
 s <- svd(A, nu = 4)
 
+# U 4x4 matrix
 s$u
 
 # s$u is orthogonal
 zapsmall(s$u %*% t(s$u))
 
+# V 3x3 matrix
 s$v
 
 # s$v is orthogonal
 zapsmall(s$v %*% t(s$v))
 
-(zapsmall(D <- diag(s$d, nrow = dim(s$u)[1], ncol = dim(s$v)[2])))
+# 4x3 matrix Sigma, including the zero entries
+(D <- diag(s$d, nrow = dim(s$u)[1], ncol = dim(s$v)[2]))
 
-s$u %*% D %*% t(s$v)
+# Verification
+zapsmall(s$u %*% D %*% t(s$v))
 ```
 
 
@@ -202,6 +223,7 @@ d.
 
 (elu <- Matrix::expand(Matrix::lu(A)))
 
+# Verification
 with(elu, P %*% L %*% U)
 ```
 
@@ -214,13 +236,14 @@ A <- matrix(c(
   1, 2, 4),
   nrow = 3, byrow = TRUE)
 
-# A is a square 3x3 matrix
+# A is a square 3x3 matrix, and
 # A is a symmetric matrix positive definite matrix since
 # the entries are positive and a_{ij} = a_{ji} for all i and j
+# so A satisfies the conditions for the Cholesky decomposition
 
 (U <- chol(A))
 
-# U is orthogonal
+# Verification
 crossprod(U)
 ```
 
@@ -233,12 +256,15 @@ A <- matrix(c(
   0, 1, 0),
   nrow = 4, byrow = TRUE)
 
+# U
 (U <- qr.R(qr(A)))
 
+# Q (R)
 (Q <- qr.Q(qr(A)))
 
 # Q is orthogonal 
 zapsmall(crossprod(Q))
 
+# Verification
 zapsmall(Q %*% U)
 ```
