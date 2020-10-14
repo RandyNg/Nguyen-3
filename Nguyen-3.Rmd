@@ -192,7 +192,7 @@ zapsmall(s$v %*% t(s$v))
 
 (zapsmall(D <- diag(s$d, nrow = dim(s$u)[1], ncol = dim(s$v)[2])))
 
-s$u %*% D %*% t(V)
+s$u %*% D %*% t(s$v)
 ```
 
 
