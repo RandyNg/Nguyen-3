@@ -19,6 +19,7 @@ Homework 3
 a.
 ```{r, indent = "    ", message = FALSE}
 library("tidyverse")
+
 # Calling the data frame df
 df <- expand.grid("x" = 1:10, "y" = 1:10) 
 ggplot(df, aes(x, y)) +
@@ -95,10 +96,13 @@ h.
 x <- seq(0, 1, 1e-4)
 fx <- sin(2*pi*x)
 sine <- data.frame("x" = x, "y" = fx)
+
+# Guess the width of the shaded grey region
+width <- .2
+
 ggplot(sine, aes(x, fx)) +
   theme_minimal() +
-  # Can't tell the exact width of the shaded grey region
-  geom_ribbon(aes(ymin = fx - 0.2125, ymax = fx + 0.2125), fill = "grey50", alpha = 0.7) +
+  geom_ribbon(aes(ymin = fx - width, ymax = fx + width), fill = "grey50", alpha = 0.7) +
   geom_line(color = "green")
 ```
 
